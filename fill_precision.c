@@ -6,28 +6,25 @@
 /*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 09:16:09 by motoure           #+#    #+#             */
-/*   Updated: 2020/02/24 09:16:11 by motoure          ###   ########.fr       */
+/*   Updated: 2020/05/13 15:55:56 by motoure          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lprintf.h"
 
-void	fill_precision(t_curr *flag, va_list args)
+void	fill_precision(t_curr *flag)
 {
 	int		i;
+	int		y;
 	char	*tmp;
 
 	tmp = NULL;
 	i = 0;
+	y = 0;
 	if (!c_str(flag->arg, '.'))
 		return ;
 	while (flag->arg[i] != '.')
 		i++;
-	if (flag->arg[i + 1] == STAR)
-	{
-		flag->precision = va_arg(args, int);
-		return ;
-	}
 	i++;
 	while (is_num(flag->arg[i]))
 	{

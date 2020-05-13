@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_nbrlen_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/23 09:29:10 by motoure           #+#    #+#             */
-/*   Updated: 2020/05/13 16:05:06 by motoure          ###   ########.fr       */
+/*   Created: 2020/05/13 16:09:22 by motoure           #+#    #+#             */
+/*   Updated: 2020/05/13 16:09:25 by motoure          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lprintf.h"
 
-char	*ft_strrev(char *str)
+int	ft_nbrlen_u(unsigned int n)
 {
-	int		i;
-	int		y;
-	char	swap;
+	unsigned int count;
 
-	swap = '0';
-	i = 0;
-	y = ft_strlen(str) - 1;
-	while (i < y)
+	count = 0;
+	if (n == 0)
+		return (1);
+	while (n)
 	{
-		swap = str[i];
-		str[i] = str[y];
-		str[y] = swap;
-		i++;
-		y--;
+		count++;
+		n /= 10;
 	}
-	return (str);
+	return (count);
 }

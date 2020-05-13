@@ -6,13 +6,34 @@
 /*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 08:16:21 by motoure           #+#    #+#             */
-/*   Updated: 2020/02/24 10:14:45 by motoure          ###   ########.fr       */
+/*   Updated: 2020/05/13 15:57:04 by motoure          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lprintf.h"
 
-int	ft_printf(const char *str, ...)
+char	*get_raw_arg(const char *str, int i)
+{
+	char *ret;
+
+	ret = NULL;
+	i++;
+	while (str && str[i])
+	{
+		ft_putchar_str(&ret, str[i]);
+		if (is_arg(ret[ft_strlen(ret) - 1]))
+			break ;
+		i++;
+	}
+	if (ret && !is_arg(ret[ft_strlen(ret) - 1]))
+	{
+		free(ret);
+		ret = NULL;
+	}
+	return (ret);
+}
+
+int		ft_printf(const char *str, ...)
 {
 	int		i;
 	int		ret;
@@ -25,11 +46,12 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] == '%' && (flag.arg = get_next_arg(str, i)) != NULL)
+		if (str[i] == '%' && (flag.arg = get_next_arg(str, i, args)) != NULL)
 		{
-			ret -= ret > 0 ? fill_struct(&flag, args) : 0;
+			flag.raw_arg = get_raw_arg(str, i);
+			ret -= ret > 0 ? (fill_struct(&flag)) : 0;
 			ret += print_struct(&flag, args);
-			i += ft_strlen(flag.arg) + 1;
+			i += ft_strlen(flag.raw_arg) + 1;
 			reset_struct(&flag);
 		}
 		else
