@@ -17,10 +17,12 @@ int	ft_atoi(char *str)
 	int return_value;
 	int i;
 	int sign;
+	int check;
 
 	sign = 1;
 	return_value = 0;
 	i = 0;
+	check = -1;
 	while ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')

@@ -15,10 +15,12 @@
 void	fill_precision(t_curr *flag)
 {
 	int		i;
+	int		y;
 	char	*tmp;
 
 	tmp = NULL;
 	i = 0;
+	y = 0;
 	if (!c_str(flag->arg, '.'))
 		return ;
 	while (flag->arg[i] != '.')

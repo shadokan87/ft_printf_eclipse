@@ -16,7 +16,7 @@ SRC = ft_atoi.c ft_nbrlen_u.c ft_memsub.c ft_nbrlen.c ft_printf.c ft_putnbr.c ft
 
 OBJ = $(subst .c,.o,$(SRC))
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 

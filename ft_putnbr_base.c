@@ -12,22 +12,6 @@
 
 #include "lprintf.h"
 
-static int	ft_strcmp(char *str, char *str2)
-{
-	int i;
-
-	i = 0;
-	if (ft_strlen(str) != ft_strlen(str2))
-		return (0);
-	while (str[i])
-	{
-		if (str[i] != str2[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int			count(int n, int b_len)
 {
 	int count;
@@ -88,11 +72,11 @@ char		*ft_putnbr_base(int n, char *base)
 
 	b_len = ft_strlen(base);
 	negative = n > 0 ? 0 : 1;
-	n *= negative ? -1 : 0;
+	n = (negative) ? n *= -1 : n;
 	i = 0;
 	if (n == 0)
 		return ("0");
-	if (n == -2147483648 && ft_strcmp(base, DEC))
+	if (n == -2147483648 && base == DEC)
 		return (ft_strdup("-2147483648"));
 	if ((!(ret = malloc(sizeof(char) * count(n, b_len) + (negative) ? 2 : 1)))
 	|| !check_base(base))
