@@ -24,7 +24,8 @@ void	ft_memsub(void **dst, void *src, size_t index, int max)
 		while (*c_src)
 		{
 			c_dst[index] = *c_src;
-			*c_src++ && index++;
+			*c_src += 1;
+			index++;
 		}
 		c_dst[index] = *c_src;
 		return ;
@@ -32,7 +33,8 @@ void	ft_memsub(void **dst, void *src, size_t index, int max)
 	while (max)
 	{
 		c_dst[index] = *c_src;
-		*c_src++ && index++;
+		*c_src += 1;
+		index++;
 		max--;
 	}
 	c_dst[index] = 0;

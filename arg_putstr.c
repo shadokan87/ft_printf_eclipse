@@ -17,9 +17,7 @@ void	arg_putstr(t_curr *flag, va_list args, int *ret)
 	int		to_ret;
 	char	*str;
 	char	*tmp;
-	int		i;
 
-	i = 0;
 	tmp = va_arg(args, char *);
 	str = ft_strdup(tmp);
 	if (flag->precision > 0 && flag->precision < ft_strlen(str))

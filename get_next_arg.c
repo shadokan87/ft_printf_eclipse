@@ -49,10 +49,8 @@ void	write_star(char **ret, int n)
 {
 	char	*tmp;
 	char	*ptr;
-	int		y;
 	int		precision;
 
-	y = 0;
 	ptr = NULL;
 	ptr = *ret;
 	precision = 0;
