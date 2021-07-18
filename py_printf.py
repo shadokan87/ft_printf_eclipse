@@ -35,14 +35,26 @@ def execCmd(prog, concat):
 	proc=subprocess.Popen(prog + " " + concat, shell=True, stdout=subprocess.PIPE)
 	output=proc.communicate()[0]
 	return (output)
-def start_main(args):
-    res = """int   main(""" + args + """)\n{""" 
-    return (res)
 class compose:
-    headers = ""
-    defines = ""
-    main = ""
-    body = ""
+    def __init__(self, headers = "", defines = "", main = "", body = ""):
+        self.headers = headers
+        self.defines = defines
+        self.main = main
+        self.body = body
+    def funcInline(self, funcname, params):
+        res = ""
+        res += funcname + "("
+        i = 0
+        while (i < len(params)):
+            res += params[i]
+            if (i != len(params) - 1):
+                res += ","
+            i += 1
+            res += ");\n"
+            return (res)
+    def startFunc(self, ret, funcname, params):
+        inline = self.funcInline(funcname, params)
+        self.body += ret + "\t" + str(inline) + "{" + ENDL
     #fill compose
     def Header(self, elems):
         for elem in elems:
@@ -51,17 +63,34 @@ class compose:
         for elem in elems:
             self.defines += "# define " + elem + ENDL
     #fill compose
+    def varInit(self, elems):
+        self.body += "\t"
+        for elem in elems:
+            self.body += elem
+        self.body += ";" + ENDL
+    def varAssign(self, elems):
+        self.body += elems[0] + " " + "=" + " " + elems[1]
     def __print__(self):
         print(self.headers)
         print(self.defines)
         print(self.body)
         print(self.main)
+            #self.self.body += elems[0] + elems[1] + ";" + ENDL
+    def func(self, funcname, params):
+        self.body += self.funcInline(funcname, params)
+    def endFunc(self):
+        self.body += "}"
+    def spanVar(self, elems, amount):
+        self.varInit(elems)
 
 def prep_test():
     #composet test
     orig = compose()
     orig.Header(["<stdio.h>","<stdlib.h>"])
-    orig.Define(["TEST \"test\""])
+    orig.startFunc("int", "main", ["void"])
+    orig.varInit(["int *", "test"])
+    orig.spanVar(["int *"])
+    orig.endFunc()
     orig.__print__()
     #
     #prog_name = "p_p_cbuild"
